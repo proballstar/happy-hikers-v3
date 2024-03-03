@@ -1,4 +1,4 @@
-import { HeartIcon, ShareIcon } from "lucide-react";
+import { AxeIcon, EditIcon, EyeIcon, HeartIcon, ShareIcon } from "lucide-react";
 import { Button } from "./button";
 import { Card, CardHeader, CardContent } from "./card";
 import { RouterOutputs } from "~/utils/api";
@@ -28,7 +28,7 @@ export default function HikingCard(props: RouterOutputs['listings']['getAll']['0
               <p className="text-sm text-gray-500">{props.post.desc}</p>
               <div className="flex flex-col w-full items-center mt-4">
                 <Button className="mr-2 w-full" variant="outline">
-                  <HeartIcon className="w-4 h-4" /> Open
+                  <EyeIcon className="w-4 h-4" /> Open
                 </Button>
               </div>
             </CardContent>

@@ -53,7 +53,7 @@ export const listingsRouter = createTRPCRouter({
 
       return {
         post,
-        author,
+        author
       };
     });
   }),
@@ -106,6 +106,7 @@ export const listingsRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
+        uid: z.string(),
       })
     )
     .query(async ({ ctx, input }) => {
@@ -135,10 +136,18 @@ export const listingsRouter = createTRPCRouter({
         });
       }
 
+      let auth = false;
+      console.log(post);
+      console.log(input.uid)
+      if (input.uid === post.prof_url) {
+        auth = true;
+      }
+
       const clerkUser = await clerkClient.users.getUser(post.prof_url!);
 
       return {
         post,
+        auth,
         author: clerkUser,
       };
     }),

@@ -9,7 +9,7 @@ import { api } from "~/utils/api";
 import Input from "~/components/input";
 import Head from "next/head";
 import RedesignedHeader from "~/components/redesigned/header";
-import { HeartIcon, ShareIcon } from "lucide-react";
+import { EditIcon, HeartIcon, ShareIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
 
 interface ToggleProps {
@@ -85,6 +85,7 @@ export default function SpecificHikePage() {
   const hid = router.query.hid as string;
   const { data, isLoading: postLoading } = api.listings.getPost.useQuery({
     id: hid,
+    uid: user?.id
   });
   const [comments, setComments] = React.useState("");
   const { mutate, isLoading: joinLoading } =
@@ -227,6 +228,9 @@ export default function SpecificHikePage() {
                 </Button>
                 <Button className="mr-2 w-full" variant="outline">
                   <ShareIcon className="w-4 h-4" /> Share
+                </Button>
+                <Button className="mr-2 w-full" variant="outline">
+                  {data.auth ? <><EditIcon className="w-4 h-4" /> Edit</>: <div></div>}
                 </Button>
                 {data.post.Discussions.length > 0 && (
                   <div className="flex flex-col">
