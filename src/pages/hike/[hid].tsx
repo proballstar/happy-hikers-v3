@@ -85,7 +85,7 @@ export default function SpecificHikePage() {
   const hid = router.query.hid as string;
   const { data, isLoading: postLoading } = api.listings.getPost.useQuery({
     id: hid,
-    uid: user?.id
+    uid: user?.id ?? '',
   });
   const [comments, setComments] = React.useState("");
   const { mutate, isLoading: joinLoading } =
