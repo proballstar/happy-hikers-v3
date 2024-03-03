@@ -77,16 +77,16 @@ import {
         route
       });
       mutate({
-        author_id: user.user?.imageUrl!,
+        author_id: user.user?.id!,
         name: title,
         desc: description,
         start: start,
         end: end,
         email: user.user?.primaryEmailAddress?.emailAddress!,
         route: route,
+        photo: photo,
         event_items: event_items,
-        miles,
-        photo: photo
+        miles: miles,
       });
     }
   
