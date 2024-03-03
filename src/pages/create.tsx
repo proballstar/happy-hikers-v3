@@ -41,6 +41,27 @@ import {
     );
   }
   
+  function SInputBox({
+    name,
+    type = "text",
+    onChange,
+  }: {
+    name: string;
+    type: string | undefined;
+    onChange: any;
+  }) {
+    return (
+      <div className="flex flex-col space-y-[0.5rem]">
+        <label className="text-2xl font-bold">{name}</label>
+        <input
+          onChange={onChange}
+          className="w-[50vw] border-b-2 border-green-500 bg-transparent px-[0.75rem] py-2 text-xl outline-none"
+          type={type}
+        />
+      </div>
+    );
+  }
+
   type EventItem = {
     name: string;
     addr: string;
@@ -69,13 +90,14 @@ import {
       if (!user.isSignedIn) {
         router.push("/sign-in")
       }
-      alert({
+      alert(JSON.stringify({
         title,
         description,
         start,
         end,
-        route
-      });
+        route,
+        miles
+      }));
       mutate({
         author_id: user.user?.id!,
         name: title,
@@ -130,12 +152,11 @@ import {
               }
               type="url"
             />
-            <InputBox
+            <SInputBox
               name="Start"
-              value={start}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setStart(e.target.valueAsDate!)
-              }
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setStart(new Date(e.target.value))
+              }}
               type="datetime-local"
             />
             <InputBox
@@ -146,12 +167,11 @@ import {
               }
               type="number"
             />
-            <InputBox
+            <SInputBox
               name="End"
-              value={end}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setEnd(e.target.valueAsDate!)
-              }
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setEnd(new Date(e.target.value))
+              }}
               type="datetime-local"
             />
             {event_items.map((item, index) => {
