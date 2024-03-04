@@ -11,6 +11,7 @@ import Head from "next/head";
 import RedesignedHeader from "~/components/redesigned/header";
 import { EditIcon, HeartIcon, ShareIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import Link from "next/link";
 
 interface ToggleProps {
   children: React.ReactNode;
@@ -142,7 +143,7 @@ export default function SpecificHikePage() {
                 {data.post.name}
               </h1>
               <h2 className="text-xl capitalize">
-                Hosted by {`${data.author.firstName} ${data.author.lastName}`}
+                Hosted by <Link href={`/user/hiker/${data.post.Person?.id}`}>{`${data.author.firstName} ${data.author.lastName}`}</Link>
               </h2>
               <p className="text-2xl">
                 <b>Description</b>: {data.post.desc}

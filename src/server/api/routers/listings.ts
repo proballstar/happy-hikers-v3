@@ -31,6 +31,9 @@ export const listingsRouter = createTRPCRouter({
           sort: "desc",
         },
       },
+      include: {
+        Person: true
+      }
     });
 
     const users = (
@@ -125,7 +128,8 @@ export const listingsRouter = createTRPCRouter({
             include: {
               Person: true,
             }
-          }
+          },
+          Person: true
         },
       });
 

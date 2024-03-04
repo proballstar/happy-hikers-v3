@@ -36,5 +36,14 @@ export const usersRouter = createTRPCRouter({
                     })
                     console.log("PERSON")
                     console.log(personCreation)
-                 })
+                 }),
+    getProfileInfo: publicProcedure.input(z.object({
+      id: z.string()
+    })).query(({ ctx, input }) => {
+      return ctx.prisma.person.findFirst({
+        where: {
+          id: input.id
+        }
+      })
+    }),
 });
